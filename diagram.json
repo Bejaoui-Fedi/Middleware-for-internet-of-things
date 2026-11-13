@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "author": "Födel Bj08",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 19.2, "left": 110.44, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -13.2,
+      "left": 522.2,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -36,
+      "left": 443.4,
+      "attrs": { "volume": "0.1" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 71.15,
+      "left": 566.4,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": -74.1, "left": 170.2, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "led1:A", "r1:1", "green", [ "v0" ] ],
+    [ "r1:2", "esp:2", "green", [ "v0" ] ],
+    [ "esp:GND.2", "led1:C", "black", [ "v-9.6", "h96", "v67.2", "h220.8", "v0", "h9.6" ] ],
+    [ "esp:GND.2", "bz1:1", "black", [ "v-28.8", "h76.8", "v96", "h163.2", "v-76.8", "h19.2" ] ],
+    [ "bz1:2", "esp:25", "green", [ "v192", "h-403.6", "v-96" ] ],
+    [ "gas1:VCC", "esp:5V", "red", [ "h9.6", "v296.7", "h-230.4", "v-48" ] ],
+    [ "gas1:GND", "esp:GND.2", "black", [ "h28.8", "v47.2", "h-124.8" ] ],
+    [ "esp:34", "gas1:AOUT", "green", [ "h-28.65", "v-86.4", "h278.4", "v-57.6" ] ]
+  ],
+  "dependencies": {}
+}
