@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "author": "Födel Bj08",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 9.6, "left": -23.96, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": -42, "left": 147.8, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 13.55,
+      "left": 182.4,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -74.4,
+      "left": 251.4,
+      "attrs": { "volume": "0.1" }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": -73.6,
+      "left": -210.4,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "ldr1:DO", "esp:13", "green", [ "h19.2", "v57", "h-67.2", "v38.4" ] ],
+    [ "esp:3V3", "ldr1:VCC", "red", [ "h-28.65", "v-28.8", "h48", "v-67.2", "h-38.4" ] ],
+    [ "ldr1:GND", "esp:GND.2", "black", [ "h134.4", "v86" ] ],
+    [ "led1:C", "esp:GND.2", "black", [ "v0" ] ],
+    [ "led1:A", "r1:1", "green", [ "v0" ] ],
+    [ "esp:14", "r1:2", "green", [ "h-57.45", "v86.4", "h326.4", "v-172.8" ] ],
+    [ "bz1:1", "esp:GND.2", "black", [ "v0" ] ],
+    [ "esp:12", "bz1:2", "green", [ "v0", "h-47.85", "v86.4", "h355.2", "v-230.4" ] ]
+  ],
+  "dependencies": {}
+}
