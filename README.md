@@ -27,5 +27,3 @@ Pour un scénario MQTT, ouvrez le README de sa branche, téléchargez les deux a
 ## Aperçu
 
 La branche par défaut illustre la connexion de base d’un ESP32 au Wi-Fi.
-
-![Aperçu : connexion d’un ESP32 à un point d’accès Wi-Fi](images/projet.png)
