@@ -23,7 +23,3 @@ Les projets couvrent la connexion Wi-Fi, la lecture de capteurs, la commande d�
 Chaque branche présente un projet autonome et son README. Les projets Wokwi contiennent leur sketch, leur schéma de câblage et une capture. Les trois scénarios MQTT comprennent également les archives `Publisher.zip` et `Subscriber.zip`, chacune avec les fichiers nécessaires à la simulation de sa carte ESP32.
 
 Pour un scénario MQTT, ouvrez le README de sa branche, téléchargez les deux archives, puis importez chacune dans un projet Wokwi distinct. Les deux ESP32 doivent utiliser le même topic MQTT. Les exemples utilisent le réseau `Wokwi-GUEST` et le broker public `broker.hivemq.com` ; pour un déploiement réel, configurez votre réseau et un broker adapté.
-
-## Aperçu
-
-La branche par défaut illustre la connexion de base d’un ESP32 au Wi-Fi.
