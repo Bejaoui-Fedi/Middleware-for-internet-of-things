@@ -1,20 +1,39 @@
-# Projets IoT — ESP32 et Wokwi
+# Scénario 3 — Seuil de potentiomètre par MQTT
 
-Ce dépôt rassemble des projets pratiques autour de l’Internet des objets (IoT), réalisés avec des microcontrôleurs ESP32 et des composants électroniques. Chaque branche contient un projet indépendant avec son code, son schéma de câblage Wokwi et une image de présentation.
+Deux cartes ESP32 communiquent par MQTT. Le Publisher lit la valeur d'un potentiomètre et la transmet au Subscriber. Celui-ci compare la valeur au seuil `250`, défini dans son code, puis active un buzzer et affiche une alerte sur le port série si la valeur est supérieure au seuil.
 
-## Projets
+## Matériel et câblage
 
-- [Connexion à un point d’accès Wi-Fi](https://github.com/Bejaoui-Fedi/Middleware-for-internet-of-things/tree/connexion-point-acces)
-- [Détection de fuite de gaz](https://github.com/Bejaoui-Fedi/Middleware-for-internet-of-things/tree/detection-fuite-gaz)
-- [Station météo](https://github.com/Bejaoui-Fedi/Middleware-for-internet-of-things/tree/station-meteo)
-- [Système d’éclairage automatique](https://github.com/Bejaoui-Fedi/Middleware-for-internet-of-things/tree/systeme-eclairage)
-- [Détection d’incendie](https://github.com/Bejaoui-Fedi/Middleware-for-internet-of-things/tree/systeme-detection-incendie)
-- [Variation de l’angle d’un servomoteur](https://github.com/Bejaoui-Fedi/Middleware-for-internet-of-things/tree/variation-angle-servomoteur)
+Deux ESP32, un potentiomètre raccordé au Publisher et un buzzer raccordé au Subscriber.
 
-## Connexion à un point d’accès Wi-Fi
+| Carte | Composant | Broche ESP32 |
+|---|---|---|
+| Publisher | Potentiomètre SIG | GPIO 34 |
+| Subscriber | Buzzer | GPIO 5 |
 
-Ce projet ESP32 se connecte au réseau Wi-Fi Wokwi-GUEST et affiche dans le moniteur série l’état de la connexion ainsi que l’adresse IP obtenue.
+Relier les bornes GND et VCC du potentiomètre respectivement à GND et 3,3 V de l'ESP32. Relier le buzzer selon le schéma Wokwi fourni dans l'archive Subscriber.
 
-### Aperçu du projet
+## Fonctionnement
 
-![Aperçu : Connexion à un point d’accès Wi-Fi](images/projet.png)
+1. Le Publisher lit la valeur analogique sur GPIO 34 et la publie sur `fedi/scenario3/valeur`.
+2. Le Subscriber compare chaque valeur reçue au seuil `SEUIL` (250).
+3. Si la valeur est supérieure à 250, le Subscriber affiche une alerte série et active le buzzer ; sinon, il arrête le buzzer et indique que la valeur est normale.
+
+Les deux sketches utilisent le Wi-Fi `Wokwi-GUEST` et le broker MQTT public `broker.hivemq.com:1883`. Garder le même topic sur les deux cartes ; choisir un topic propre à votre installation pour éviter les messages partagés sur le broker public.
+
+## Archives et captures
+
+- [Télécharger le Publisher](Publisher.zip) — bibliothèque `PubSubClient`.
+- [Télécharger le Subscriber](Subscriber.zip) — bibliothèque `PubSubClient`.
+- [Ouvrir le Publisher dans Wokwi](https://wokwi.com/projects/481143519552073729).
+- [Ouvrir le Subscriber dans Wokwi](https://wokwi.com/projects/481143544217734145).
+
+### Publisher — potentiomètre
+
+![Capture du Publisher avec le potentiomètre](images/publisher.png)
+
+### Subscriber — buzzer et alerte série
+
+![Capture du Subscriber avec le buzzer et l'alerte de seuil](images/subscriber.png)
+
+Pour simuler, ouvrir les deux projets Wokwi, lancer chaque ESP32 et vérifier que les deux sketches utilisent le même topic MQTT.
